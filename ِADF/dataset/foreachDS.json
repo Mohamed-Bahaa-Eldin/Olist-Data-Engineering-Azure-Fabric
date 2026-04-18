@@ -1,0 +1,18 @@
+{
+	"name": "foreachDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "foreachLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

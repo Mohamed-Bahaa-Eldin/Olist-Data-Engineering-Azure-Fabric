@@ -1,0 +1,9 @@
+{
+	"name": "BDEB-olist",
+	"location": "spaincentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "067244d1-7769-4735-8b77-714de5ef07ec",
+		"tenantId": "7f3a6ceb-c511-477b-a21a-ea83ceae53d8"
+	}
+}
