@@ -1,0 +1,45 @@
+
+---- dim products
+alter table dim_products add CONSTRAINT prodcut_pk PRIMARY KEY NONCLUSTERED ([product_key]) not ENFORCED
+
+---- dim sellers
+alter table dim_sellers add CONSTRAINT seller_pk primary key nonclustered ([seller_key]) not enforced
+
+---- dim customers
+alter table dim_customers add constraint customer_pk primary key nonclustered ([customer_key]) not ENFORCED
+
+---- dim date
+ALTER TABLE  dim_date ADD CONSTRAINT PK_date PRIMARY KEY NONCLUSTERED (date_key) NOT ENFORCED;
+
+---- dim time
+ALTER TABLE dim_time add CONSTRAINT date_pk PRIMARY KEY NONCLUSTERED (time_key) not ENFORCED;
+
+--- fact orders
+ALTER TABLE fact_orders add CONSTRAINT customer_key_pk PRIMARY key NONCLUSTERED ([order_key]) not ENFORCED
+ALTER TABLE fact_orders ADD CONSTRAINT customer_con_fk FOREIGN KEY ([customer_id_fk]) REFERENCES dim_customers([customer_key])not ENFORCED
+
+ALTER TABLE fact_orders ADD CONSTRAINT order_purchase_date_con_fk FOREIGN KEY ([order_purchase_date_fk]) REFERENCES dim_date([date_key])not ENFORCED
+ALTER TABLE fact_orders ADD CONSTRAINT order_purchase_time_con_fk FOREIGN KEY ([order_purchase_time_fk]) REFERENCES dim_time([time_key])not ENFORCED
+
+ALTER TABLE fact_orders ADD CONSTRAINT order_approved_date_con_fk FOREIGN KEY ([order_approved_date_fk]) REFERENCES dim_date([date_key])not ENFORCED
+ALTER TABLE fact_orders ADD CONSTRAINT order_approved_time_con_fk FOREIGN KEY ([order_approved_time_fk]) REFERENCES dim_time([time_key])not ENFORCED
+
+ALTER TABLE fact_orders ADD CONSTRAINT order_delivered_customers_date_con_fk FOREIGN KEY ([order_delivered_customers_date_fk]) REFERENCES dim_date([date_key])not ENFORCED
+ALTER TABLE fact_orders ADD CONSTRAINT order_delivered_customers_time_con_fk FOREIGN KEY ([order_delivered_customers_time_fk]) REFERENCES dim_time([time_key])not ENFORCED
+
+ALTER TABLE fact_orders ADD CONSTRAINT order_delivered_carrier_date_con_fk FOREIGN KEY ([order_delivered_carrier_date_fk]) REFERENCES dim_date([date_key])not ENFORCED
+ALTER TABLE fact_orders ADD CONSTRAINT order_delivered_carrier_time_con_fk FOREIGN KEY ([order_delivered_carrier_time_fk]) REFERENCES dim_time([time_key])not ENFORCED
+
+
+---- fact order items 
+
+alter table fact_order_items add constraint order_item_key_pk primary key nonclustered ([order_item_key]) not enforced
+alter table fact_order_items add constraint order_id_fk_con_fact_order_item foreign key ([order_id_fk]) references fact_orders([order_key]) not enforced
+alter table fact_order_items add constraint product_id_fk_fact_order_item foreign key ([product_id_fk]) references dim_products([product_key]) not enforced
+alter table fact_order_items add constraint seller_id_fk_fact_order_item foreign key ([seller_id_fk]) references dim_sellers([seller_key]) not enforced
+
+
+----- fact order payment
+
+alter table fact_order_payments add constraint order_payment_key_con_pk primary key nonclustered ([order_payment_key]) not ENFORCED
+alter table fact_order_payments add CONSTRAINT order_id_fk_con_fact_payment FOREIGN KEY ([order_id_fk]) REFERENCES fact_orders([order_key]) not enforced
