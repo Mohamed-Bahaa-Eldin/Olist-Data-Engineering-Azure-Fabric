@@ -1,5 +1,5 @@
 
-## 📋 Project Overview
+##  Project Overview
 This project demonstrates a robust, enterprise-grade Data Engineering pipeline utilizing the **Medallion Architecture** (Bronze, Silver, Gold). It integrates diverse data sources into a unified ecosystem using Azure-native tools for heavy lifting and Microsoft Fabric for modeling, orchestration, and business intelligence. 
 
 All infrastructure and resources (ADLS Gen2, Data Factory, Databricks).
@@ -7,13 +7,13 @@ All infrastructure and resources (ADLS Gen2, Data Factory, Databricks).
 
 ---
 
-## 🏗️ Architecture Diagram
+##  Architecture Diagram
  
 <img width="1536" height="836" alt="2" src="https://github.com/user-attachments/assets/b28033c0-322c-4793-926b-dbd5410e12a5" />
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 * **Data Sources:** GitHub (REST API), MySQL (Relational), MongoDB (NoSQL)
 * **Ingestion:** Azure Data Factory (ADF)
 * **Storage:** Azure Data Lake Storage Gen2 (ADLS Gen2)
@@ -23,7 +23,7 @@ All infrastructure and resources (ADLS Gen2, Data Factory, Databricks).
 
 ---
 
-## 🎯 Business Logic & Problem Solving
+##  Business Logic & Problem Solving
 Traditional flat-table exports often fail to provide accurate metrics due to data "fan-out." This project solves this by implementing a **Multi-Fact Star Schema** to address specific analytical needs:
 
 ### 1️⃣ Handling Granularity (The 3-Fact Strategy)
