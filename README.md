@@ -9,7 +9,7 @@ All infrastructure and resources (ADLS Gen2, Data Factory, Databricks).
 
 ##  Architecture Diagram
  
-<img width="1536" height="836" alt="2" src="https://github.com/user-attachments/assets/b28033c0-322c-4793-926b-dbd5410e12a5" />
+<img width="1536" height="560" alt="2" src="https://github.com/user-attachments/assets/58daf561-8d96-4445-8305-744e33827bfa" />
 
 ---
 
@@ -42,7 +42,15 @@ I created custom logic to extract insights that were missing from the raw data:
 ### 3️⃣ Dimension History (SCD)
 To handle evolving business catalogs, I implemented **Dimension History (SCD Type 1)** for the Product table. If a product's classification or category changes in the source system, the pipeline automatically updates the Gold layer to reflect the latest hierarchy, ensuring Power BI reports are always up to date.
 
-## 🚀 Pipeline Phases & Key Highlights
+### 4️⃣ Production-Grade Engineering
+* **Performance Optimization:** Implemented **Explicit Schema Definition** to eliminate Spark's inference overhead and ensure strict data contracts during the ingestion process.
+* **Automated Data Cleaning:** Developed a modular cleaning function that dynamically identifies **String columns** to perform **Trim operations**, ensuring data consistency and removing whitespaces across all tables.
+* **Robust Data Persistence (`save_to_silver`):** Built a centralized utility function to automate the Medallion transition with:
+    * **Dynamic Z-Ordering:** Automatically applies `OPTIMIZE` and `ZORDER BY` for critical tables (Orders, Items, Customers) based on a configuration dictionary to boost query performance.
+    * **Integrated Logging:** Implemented full **Python Logging** to monitor ingestion progress, track table-level status, and capture detailed error traces for faster debugging.
+    * **Delta Lake Management:** Utilizes `overwriteSchema` and idempotent table recreation logic to ensure the pipeline remains resilient and consistent across multiple runs.
+
+##  Pipeline Phases & Key Highlights
 
 ### 1️⃣ Ingestion: The Bronze Layer
 * **The Process:** Extracting raw data from GitHub APIs, MySQL, and MongoDB, and loading it into the Bronze container in ADLS Gen2.
